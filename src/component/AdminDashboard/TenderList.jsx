@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function TenderList() {
   const [tenders, setTenders] = useState([]);
- 
 
   useEffect(() => {
     axios
@@ -12,13 +13,19 @@ function TenderList() {
       .catch((error) => console.error("Error fetching tenders:", error));
   }, []);
 
-  const deleteTender = (id) => {
-    axios
-      .delete(`http://localhost:3900/api/tenderDelete/${id}`)
-      .then(() => setTenders(tenders.filter((tender) => tender.id !== id)))
-      .catch((error) => console.error("Error deleting tender:", error));
-      
-
+  const deleteTender = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3900/api/tenderDelete/${id}`
+      );
+      setTenders((prevTenders) =>
+        prevTenders.filter((tender) => tender._id !== id)
+      );
+      toast.success(response.data.msg, { position: "top-right" });
+    } catch (error) {
+      console.error("Error deleting tender:", error);
+      toast.error("Failed to delete tender", { position: "top-right" });
+    }
   };
 
   return (
@@ -80,17 +87,23 @@ function TenderList() {
                       <td>{new Date(tender.endTime).toLocaleString()}</td>
                       <td>{tender.bufferTime} mins</td>
                       <td>
-                        {/* <Link
-                          to={`/edit-tender/${tender.id}`}
+                        <Link
+                          to={`/tenderupdate/` + tender._id}
                           className="btn btn-warning mr-2"
                         >
-                          Edit
-                        </Link> */}
+                          <i className="fa-solid fa-pen-to-square"></i>
+                        </Link>
+                        <Link
+                          to={`/viewtender/` + tender._id}
+                          className="btn btn-success ms-2"
+                        >
+                          <i className="fa-solid fa-eye"></i>
+                        </Link>
                         <button
                           className="btn btn-danger ms-2"
-                          onClick={() => deleteTender(tender.id)}
+                          onClick={() => deleteTender(tender._id)}
                         >
-                          Delete
+                          <i className="fa-solid fa-trash"></i>
                         </button>
                       </td>
                     </tr>

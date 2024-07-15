@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Login from './component/Login'
@@ -12,10 +9,10 @@ import AdminDashboard from './component/AdminDashboard/AdminDashboard'
 import TenderForm from './component/AdminDashboard/TenderForm'
 import TenderList from './component/AdminDashboard/TenderList'
 import BidForm from './component/BidForm'
+import ViewTender from './component/ViewTender'
+import TenderUpdate from './component/TenderUpdate'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     <Header/>
@@ -27,6 +24,8 @@ function App() {
       <Route path='/tenderform' element={<TenderForm/>}></Route>
       <Route path='/tenderlist' element={<TenderList/>}></Route>
       <Route path='/bidform' element={<BidForm/>}></Route>
+      <Route path='/viewtender/:id' element={<ViewTender/>}></Route>
+      <Route path='/tenderupdate/:id' element={<TenderUpdate/>}></Route>
     </Routes>
     <Footer/>
       
