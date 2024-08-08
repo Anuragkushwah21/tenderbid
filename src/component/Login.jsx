@@ -27,6 +27,7 @@ function Login() {
         loginData
       );
       setSuccess("Login successful");
+      navigate("/")
       console.log("Login successful:", response.data);
     } catch (error) {
       setError(

@@ -25,11 +25,12 @@ function Registration() {
       name,
       email,
       password,
+      confirmPassword
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:3900/api/userInsert",
+        "http://localhost:3900/api/userinsert",
         registrationData
       );
       setSuccess("Registration successful");
