@@ -2,7 +2,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Login from './component/Login'
 import Dashboard from './component/Dashboard'
-// import Registration from './component/Registration'
+import Registration from './component/Registration'
 import Header from './component/Header'
 import Footer from './component/Footer'
 import AdminDashboard from './component/AdminDashboard/AdminDashboard'
@@ -19,7 +19,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Dashboard/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
-      {/* <Route path='/registration' element={<Registration/>}></Route> */}
+      <Route path='/register' element={<Registration/>}></Route>
       <Route path='/admindashboard' element={<AdminDashboard/>}></Route>
       <Route path='/tenderform' element={<TenderForm/>}></Route>
       <Route path='/tenderlist' element={<TenderList/>}></Route>

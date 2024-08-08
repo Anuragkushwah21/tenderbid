@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-
-function Login() {
+import { useNavigate } from "react-router-dom";
+function Registration() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -16,40 +16,60 @@ function Login() {
     setError("");
     setSuccess("");
 
-    const loginData = {
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    const registrationData = {
+      name,
       email,
       password,
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:3900/api/verifylogin",
-        loginData
+        "http://localhost:3900/api/userInsert",
+        registrationData
       );
-      setSuccess("Login successful");
-      console.log("Login successful:", response.data);
+      setSuccess("Registration successful");
+      console.log("Registration successful:", response.data);
+      // Optionally, navigate to login page
+      navigate("/login");
     } catch (error) {
       setError(
-        "Login failed: " + (error.response?.data?.message || error.message)
+        "Registration failed: " +
+          (error.response?.data?.message || error.message)
       );
     }
   };
- 
 
   return (
     <>
-      <Container className="d-flex align-items-center justify-content-center vh-100"style={{backgroundImage:`url("/public/tender.jpg")`}}>
+      <Container
+        className="d-flex align-items-center justify-content-center vh-100"
+        style={{ backgroundImage: `url("/public/register_bg.jpg")` }}
+      >
         <Row className="w-100">
           <Col md={{ span: 6, offset: 3 }}>
             <Card>
               <Card.Body>
-                <h3 className="text-center">Login</h3>
+                <h3 className="text-center">Register</h3>
                 {error && <p className="text-danger text-center">{error}</p>}
                 {success && (
                   <p className="text-success text-center">{success}</p>
                 )}
                 <Form onSubmit={handleSubmit}>
-                  <Form.Group controlId="formBasicEmail">
+                  <Form.Group controlId="formBasicName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="formBasicEmail" className="mt-3">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                       type="email"
@@ -67,14 +87,22 @@ function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
+                  <Form.Group controlId="formConfirmPassword" className="mt-3">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Confirm Password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </Form.Group>
                   <Button
                     variant="primary"
                     type="submit"
                     className="mt-4 w-100"
                   >
-                    Login
+                    Register
                   </Button>
-                  <Link to="/register">Register Here</Link>
                 </Form>
               </Card.Body>
             </Card>
@@ -85,4 +113,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Registration;

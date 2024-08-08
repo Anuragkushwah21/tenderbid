@@ -10,7 +10,7 @@ function ViewTender() {
     axios
       .get(` http://localhost:3900/api/getSingleTender/${id}`)
       .then((response) => {
-        console.log(response.data.data)
+        // console.log(response.data.data)
         setTender(response.data);
       })
       .catch((error) => {

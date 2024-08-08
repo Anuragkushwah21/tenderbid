@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -68,7 +68,6 @@ function Dashboard() {
             <tbody>
               {users.map((item) => (
                 <tr>
-                  {/* <td>{item._id}</td> */}
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>{item.startTime}</td>
