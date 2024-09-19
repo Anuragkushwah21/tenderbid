@@ -6,7 +6,7 @@ function BidForm({tenderEndTime}) {
   const [users, setusers] = useState([]);
 
   const useList = async () => {
-    const res = await axios.get("http://localhost:3900/api/bidDisplay");
+    const res = await axios.get("/api/bidDisplay");
     // console.log(res.data.getAllBid);
     setusers(res.data.getAllBid);
   };
@@ -51,7 +51,7 @@ function BidForm({tenderEndTime}) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3900/api/userbid",
+        "/api/userbid",
         dataToSend
       );
       setSuccess("Bid submitted successfully");

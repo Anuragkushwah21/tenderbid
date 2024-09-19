@@ -18,7 +18,7 @@ function TenderUpdate() {
   useEffect(() => {
    
     axios
-      .get(` http://localhost:3900/api/getSingleTender/${id}`)
+      .get(` /api/getSingleTender/${id}`)
       .then((response) => {
         console.log(response.data.data)
         setData(response.data);
@@ -41,7 +41,7 @@ function TenderUpdate() {
     // console.log(data)
     try {
       const res = await axios.post(
-        `http://localhost:3900/api/tenderUpdate/${id}`,
+        `/api/tenderUpdate/${id}`,
         data
       );
       if (res.status === 200) {

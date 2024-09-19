@@ -15,7 +15,7 @@ function TenderForm() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:3900/api//getSingleTender/${id}`)
+        .get(`/api/getSingleTender/${id}`)
         .then((response) => {
           const tender = response.data;
           setName(tender.name);
@@ -43,7 +43,7 @@ function TenderForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3900/api/tenderinsert",
+        "/api/tenderinsert",
         tenderData
       );
     //   console.log(res.data.data)

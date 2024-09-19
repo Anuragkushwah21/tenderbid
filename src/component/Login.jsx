@@ -23,7 +23,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3900/api/verifylogin",
+        "/api/verifylogin",
         loginData
       );
       setSuccess("Login successful");

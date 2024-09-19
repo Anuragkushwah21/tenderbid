@@ -8,7 +8,7 @@ function TenderList() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3900/api/tenderDisplay")
+      .get("/api/tenderDisplay")
       .then((response) => setTenders(response.data.data))
       .catch((error) => console.error("Error fetching tenders:", error));
   }, []);
@@ -16,7 +16,7 @@ function TenderList() {
   const deleteTender = async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:3900/api/tenderDelete/${id}`
+        `/api/tenderDelete/${id}`
       );
       setTenders((prevTenders) =>
         prevTenders.filter((tender) => tender._id !== id)

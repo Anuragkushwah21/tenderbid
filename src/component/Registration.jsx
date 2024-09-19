@@ -30,7 +30,7 @@ function Registration() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3900/api/userinsert",
+        "/api/userinsert",
         registrationData
       );
       setSuccess("Registration successful");

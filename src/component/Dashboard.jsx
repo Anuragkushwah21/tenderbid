@@ -4,12 +4,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
-  const [users, setusers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const useList = async () => {
-    const res = await axios.get("http://localhost:3900/api/tenderDisplay");
+    const res = await axios.get("/api/tenderDisplay");
     console.log(res.data.data);
-    setusers(res.data.data);
+    setUsers(res.data.data);
   };
 
   useEffect(() => {

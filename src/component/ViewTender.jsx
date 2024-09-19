@@ -8,7 +8,7 @@ function ViewTender() {
   useEffect(() => {
    
     axios
-      .get(` http://localhost:3900/api/getSingleTender/${id}`)
+      .get(` /api/getSingleTender/${id}`)
       .then((response) => {
         // console.log(response.data.data)
         setTender(response.data);
